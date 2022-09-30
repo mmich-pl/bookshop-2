@@ -1,3 +1,4 @@
 django>=3.2,<4.0
 djangorestframework
 django-dotenv
+psycopg2>=2.8
