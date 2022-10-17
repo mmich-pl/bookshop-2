@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +38,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append('django_extensions')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,3 +145,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Defining user model
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# JWT
+REST_AUTH_REGISTER_SERIALIZERS = {
+     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
